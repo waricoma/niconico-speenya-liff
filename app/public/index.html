@@ -1,0 +1,129 @@
+<head>
+  <title>Reporter</title>
+  <link rel="icon" href="https://liff-reporter.netlify.com/facebook_profile_image.png">
+  <link rel="apple-touch-icon" href="https://liff-reporter.netlify.com/facebook_profile_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@waritocomatta">
+  <meta name="twitter:creator" content="@waritocomatta">
+  <meta property="og:url" content="https://liff-reporter.glitch.me">
+  <meta property="og:title" content="liff-reporter">
+  <meta property="og:description" content="liff-reporter">
+	<meta property="og:image" content="https://liff-reporter.netlify.com/facebook_cover_photo_2.png">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+  <style>
+    /* Custom color */
+    .button-black {
+      background-color: black;
+      border-color: black;
+    }
+    .button-black.button-clear,
+    .button-black.button-outline {
+      background-color: transparent;
+      color: black;
+    }
+    .button-black.button-clear {
+      border-color: transparent;
+    }
+
+    /* Custom size */
+    .button-small {
+      font-size: .8rem;
+      height: 2.8rem;
+      line-height: 2.8rem;
+      padding: 0 1.5rem;
+    }
+ 
+    .button-large {
+      font-size: 1.4rem;
+      height: 4.5rem;
+      line-height: 4.5rem;
+      padding: 0 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <a id="like" class="button button-large">👍 LIKE</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <label for="size">Size</label>
+        <select id="size">
+          <option value="big">Big</option>
+          <option value="medium" selected>Medium</option>
+          <option value="small">Small</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <label for="speed">Speed</label>
+        <select id="speed">
+          <option value="slow">Slow</option>
+          <option value="medium" selected>Medium</option>
+          <option value="fast">Fast</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <label for="color">Color</label>
+        <select id="color">
+          <option value="black" selected>Black</option>
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <script>
+  liff.init(function (data) {
+    $.post(location.origin + '/lineIdToInf', data.context.userId).done(function (res) {
+      if ('err' in res) {
+        return;
+      }
+
+      $('#size').val( $('#size option').eq( parseFloat( res.inf.sizeId ) ).val() );
+      $('#speed').val( $('#speed option').eq( parseFloat( res.inf.speedId ) ).val() );
+      $('#color').val( $('#color option').eq( parseFloat( res.inf.colorId ) ).val() );
+    });
+
+    $(document).on('click', '#like', function () {
+      liff.sendMessages([{
+        type: 'text',
+        text: '!like'
+      }]);
+    });
+
+    $(document).on('change', '#size', function () {
+      liff.sendMessages([{
+        type: 'text',
+        text: '!size:' + $(this).val()
+      }]);
+    });
+
+    $(document).on('change', '#speed', function () {
+      liff.sendMessages([{
+        type: 'text',
+        text: '!speed:' + $(this).val()
+      }]);
+    });
+
+    $(document).on('change', '#color', function () {
+      liff.sendMessages([{
+        type: 'text',
+        text: '!color:' + $(this).val()
+      }]);
+    });
+  });
+  </script>
+</body>

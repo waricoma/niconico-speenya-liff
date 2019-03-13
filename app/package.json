@@ -1,0 +1,93 @@
+{
+  "dependencies": {
+    "@line/bot-sdk": "^6.4.0",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "fs-extra": "^7.0.1",
+    "helmet": "^3.15.1",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "rotating-file-stream": "^1.4.0",
+    "sequelize": "^4.42.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "sqlite3": "^4.0.6",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "add-text-to-markdown": "^2.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "documentation": "^9.1.1",
+    "eslint-plugin-flowtype": "^3.4.2",
+    "flow-bin": "^0.93.0",
+    "flow-typed": "^2.5.1",
+    "semistandard": "^13.0.1",
+    "sequelize-cli": "^5.4.0"
+  },
+  "name": "niconico-speenya-liff",
+  "version": "1.0.0",
+  "description": "niconico-speenya-liff",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js & node ./dist/receiver.js",
+    "semistandard": "semistandard",
+    "semistandard:fix": "semistandard --fix",
+    "flow:check": "flow check",
+    "flow-typed:install": "flow-typed install --skip",
+    "babel": "babel ./src/ -d ./dist/",
+    "babel:watch": "babel ./src/ -d ./dist/ --watch",
+    "babel:compact": "babel ./src/ -d ./dist/ --compact=true",
+    "sequelize:migrate": "cd ./db/ && sequelize db:migrate",
+    "documentation:build": "documentation build -f html ./dist/ -o ./doc/",
+    "documentation:add-text-to-markdown": "documentation build -f md ./dist/ | add-text-to-markdown ../README.md --section 'DocumentationJS' --write"
+  },
+  "semistandard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ],
+    "ignore": [
+      "node_modules",
+      "dist",
+      "doc",
+      "db",
+      "flow-typed/npm",
+      "log",
+      "views",
+      "public"
+    ],
+    "global": [
+      "location",
+      "HtmlService",
+      "SpreadsheetApp",
+      "doPost",
+      "Logger",
+      "fixture",
+      "test"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waricoma/niconico-speenya-liff.git"
+  },
+  "keywords": [
+    "express",
+    "line",
+    "sequelize",
+    "sqlite3",
+    "flow",
+    "semistandard",
+    "niconico-speenya"
+  ],
+  "author": "Motone Adachi ( waricoma )",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waricoma/niconico-speenya-liff/issues"
+  },
+  "homepage": "https://github.com/waricoma/niconico-speenya-liff#readme"
+}

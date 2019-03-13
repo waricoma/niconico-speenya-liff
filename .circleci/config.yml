@@ -1,0 +1,53 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.14-browsers
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/test
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "app/package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: cd app && yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "app/package.json" }}
+ 
+      - run: cd app && yarn run semistandard:fix
+
+      - run: cd app && yarn run flow:check
+
+      - run: cd app && yarn run babel:compact
+
+      - run: cd app && yarn run sequelize:migrate
+
+      - run: docker -v
+
+      - run: docker-compose -v
+
+      - run: docker network create testing-network
+
+      - run: docker-compose -f docker-compose.ci.yml build
+
+      - run: docker-compose -f docker-compose.ci.yml run testcafe

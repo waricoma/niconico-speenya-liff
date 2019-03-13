@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "testcafe": "^0.16.2"
+  }
+}

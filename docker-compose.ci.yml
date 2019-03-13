@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    build:
+      context: ./app
+    networks:
+       - testing-network
+  testcafe:
+    container_name: testcafe
+    build:
+      context: ./testcafe
+    networks:
+       - testing-network
+    depends_on:
+      - app
+    command: >
+      "chromium:headless --no-sandbox"
+      /var/src/test/tests/e2e/*/*.test.js
+      -s /var/src/test/screenshots
+networks:
+  testing-network:
+    external: true

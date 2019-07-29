@@ -1,5 +1,7 @@
 # niconico-speenya-liff
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/waricoma/niconico-speenya-liff.svg)](https://greenkeeper.io/)
+
 [https://github.com/chimerast/niconico-speenya](https://github.com/chimerast/niconico-speenya)  
 &  
 [https://developers.line.biz/en/docs/liff/](https://developers.line.biz/en/docs/liff/)

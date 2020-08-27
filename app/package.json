@@ -27,7 +27,7 @@
     "flow-bin": "0.103.0",
     "flow-typed": "2.5.1",
     "semistandard": "14.2.3",
-    "sequelize-cli": "5.4.0"
+    "sequelize-cli": "5.5.1"
   },
   "name": "niconico-speenya-liff",
   "version": "1.0.0",

@@ -2,6 +2,6 @@
   "private": true,
   "dependencies": {
     "dotenv": "8.2.0",
-    "testcafe": "1.9.2"
+    "testcafe": "1.9.3"
   }
 }

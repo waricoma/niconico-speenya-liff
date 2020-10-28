@@ -1,4 +1,4 @@
-FROM node:10.22
+FROM node:10.23
 
 COPY . /var/src/app/
 WORKDIR /var/src/app

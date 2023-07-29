@@ -25,7 +25,7 @@
     "documentation": "13.0.2",
     "eslint-plugin-flowtype": "5.2.0",
     "flow-bin": "0.135.0",
-    "flow-typed": "3.2.1",
+    "flow-typed": "3.9.0",
     "semistandard": "14.2.3",
     "sequelize-cli": "6.2.0"
   },
